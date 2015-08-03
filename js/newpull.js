@@ -9,20 +9,28 @@
         var zip = $('select option:selected').text().substring(1, 6);
 
         // make AJAX call
-        $.getJSON('http://data.colorado.gov/resource/4ykn-tg5h.json?entityStatus=Good%20Standing&principalZipCode=' + zip, function (data) {
+        $.getJSON('http://api.eia.gov/category/?api_key=33286745501E59DF160860DFFA09AD36&category_id=38A', function (data) {
             
             // do all this on success       
             var items = [],
                 $ul;
+            console.log(data);
+            for (var i = 0; i < data.category.childseries.length; i++) {
+              var newName = data.category.childseries[i];
+              var catId = newName.series_id;
+              console.log(newName);
             
-            $.each(data, function (key, val) {
-                //iterate through the returned data and build a list
-                items.push('<li id="' + key + '"><span class="name">' + val.entityname + '</span><br><span class="addr">' + val.principaladdress1 + '</span> <span class="city">' + val.principalcity + '</span></li>');
-            });
-            console.log("Success!");
+            items.push('<li id="' + newName + '"><span class="name">' + catId + '</span><br><span class="addr">' + newName.units + '</span> <span class="city">' + newName.updated + '</span></li>');
+            }
+
+          
+            
+
+            
+            console.log("success!");
             // if no items were returned then add a message to that effect
             if (items.length < 1) {
-                items.push('<li>No results for this ZIP code, try again!</li>');
+                items.push('<li>Failure, try again!</li>');
             }
             
             // remove spinner
