@@ -26,3 +26,7 @@ h1{
     left: 35%;
     margin-top: 1em;
 }
+
+.jvectormap-container {
+  min-height: 500px;
+}

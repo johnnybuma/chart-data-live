@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Colorado Data Pull Example</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/css/topcoat-desktop-light.min.css">
+        <link href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link href="http://fonts.googleapis.com/css?family=Fjalla+One|Cantarell:400,400italic,700italic,700" rel="stylesheet" type="text/css" />
+        <link rel="stylesheet" href="css/styles.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+  </head>
+  <body>
+    <div class="content">
+             <button class="topcoat-button--cta">Let's do this thing!</button>
+             <script src="js/api.js"></script>
+    </div>  
+    
+    
+   <div class="eia-visualization" map="us_merc_en" initial_regions="" geoset_id="ELEC.REV.RES.A" relation_mode="line" style="width: 915px; min-height: 500px">
+    <script src="js/EIA_grapher.js"></script>
+    <script type="text/javascript">EIA_grapher.api_key = '33286745501E59DF160860DFFA09AD36'; </script>
+    <script src="js/highcharts.3.0.10.min.js"></script>
+    <script src="js/jquery-jvectormap-2.0.1.min.js"></script>  
+    <script src="js/jquery-jvectormap.js"></script>
+    <script src="js/us-merc-en.js"></script>
+    <script src="js/world-iso-mill-en.js"></script>
+    </div>
+  
+  
+  </body>
+</html>  
