@@ -6,28 +6,92 @@
         <title>Colorado Data Pull Example</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/topcoat/0.8.0/css/topcoat-desktop-light.min.css">
         <link href="https://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Fjalla+One|Cantarell:400,400italic,700italic,700" rel="stylesheet" type="text/css" />
         <link rel="stylesheet" href="/css/styles.css">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
   </head>
   <body>
     <div class="content">
-             <button class="topcoat-button--cta">Let's do this thing!</button>
-             <script src="/js/api.js"></script>
+      
+       
+      <span>Choose: </span>
+      <select tabindex="2" id="states" class="statesOption">
+    <option value="AL">AL</option><br />
+    <option value="AK">AK</option><br />
+    <option value="AZ">AZ</option><br />
+    <option value="AR">AR</option><br />
+    <option value="CA">CA</option><br />
+    <option value="CO">CO</option><br />
+    <option value="CT">CT</option><br />
+    <option value="DE">DE</option><br />
+    <option value="DC">DC</option><br />
+    <option value="FL">FL</option><br />
+    <option value="GA">GE</option><br />
+    <option value="HI">HI</option><br />
+    <option value="ID">ID</option><br />
+    <option value="IL">IL</option><br />
+    <option value="IN">IN</option><br />
+    <option value="IA">IA</option><br />
+    <option value="KS">KS</option><br />
+    <option value="KY">KY</option><br />
+    <option value="LA">LA</option><br />
+    <option value="ME">ME</option><br />
+    <option value="MD">MD</option><br />
+    <option value="MA">MA</option><br />
+    <option value="MI">MI</option><br />
+    <option value="MN">MN</option><br />
+    <option value="MS">MS</option><br />
+    <option value="MO">MO</option><br />
+    <option value="MT">MT</option><br />
+    <option value="NE">NE</option><br />
+    <option value="NV">NV</option><br />
+    <option value="NH">NH</option><br />
+    <option value="NJ">NJ</option><br />
+    <option value="NM">NM</option><br />
+    <option value="NY">NY</option><br />
+    <option value="NC">NC</option><br />
+    <option value="ND">ND</option><br />
+    <option value="OH">OH</option><br />
+    <option value="OK">OK</option><br />
+    <option value="OR">OR</option><br />
+    <option value="PA">PA</option><br />
+    <option value="RI">RI</option><br />
+    <option value="SC">SC</option><br />
+    <option value="SD">SD</option><br />
+    <option value="TN">TN</option><br />
+    <option value="TX" selected="selected">TX</option><br />
+    <option value="UT">UT</option><br />
+    <option value="VT">VT</option><br />
+    <option value="VA">VA</option><br />
+    <option value="WA">WA</option><br />
+    <option value="WV">WV</option><br />
+    <option value="WI">WI</option><br />
+    <option value="WY">WY</option><br />
+</select>
+      <button class="topcoat-button--cta">Let's do this thing!</button>
+      <script src="/js/api.js"></script>
+
     </div>  
     
-    
-   <div class="eia-visualization" map="us_merc_en" initial_regions="" geoset_id="ELEC.REV.RES.A" relation_mode="line" style="width: 915px; min-height: 500px">
-    <script src="/js/EIA_grapher.js"></script>
-    <script type="text/javascript">EIA_grapher.api_key = '33286745501E59DF160860DFFA09AD36'; </script>
-    <script src="/js/highcharts.3.0.10.min.js"></script>
-    <script src="/js/jquery-jvectormap-2.0.1.min.js"></script>  
-    <script src="/js/jquery-jvectormap.js"></script>
-    <script src="/js/us-merc-en.js"></script>
-    <script src="/js/world-iso-mill-en.js"></script>
-    </div>
+   <!--<div class="row">
+       <div class="col-md-6 col-md-offset-3">
+     
+           <div class="eia-visualization" map="us_merc_en" initial_regions="" geoset_id="ELEC.REV.RES.A" relation_mode="line" style="width: 915px; min-height: 500px">
+            <script src="/js/EIA_grapher.js"></script>
+            <script type="text/javascript">EIA_grapher.api_key = '33286745501E59DF160860DFFA09AD36'; </script>
+            <script src="/js/highcharts.3.0.10.min.js"></script>
+            <script src="/js/jquery-jvectormap-2.0.1.min.js"></script>  
+            <script src="/js/jquery-jvectormap.js"></script>
+            <script src="/js/us-merc-en.js"></script>
+            <script src="/js/world-iso-mill-en.js"></script>
+            </div>
+     </div>
+    </div>  -->
   
   
   </body>

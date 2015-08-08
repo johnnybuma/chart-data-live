@@ -30,3 +30,8 @@ h1{
 .jvectormap-container {
   min-height: 500px;
 }
+
+.highcharts-container {
+  width: 700px !important;
+}
+

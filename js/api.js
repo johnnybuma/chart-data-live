@@ -1,3 +1,4 @@
+
 (function ($) {
     $('button').on('click', function () {
         // remove resultset if this has already been run
@@ -6,10 +7,10 @@
         $('<i class="fa fa-refresh fa-spin"/>').appendTo('body');
         
         // get selected zip code from selectbox
-        var zip = $('select option:selected').text().substring(1, 6);
-
+         var state = $('select option:selected').text();
+          console.log(state);
         // make AJAX call
-        $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.REV.CA-RES.A', function (data) {
+        $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.REV.' + state + '-RES.A', function (data) {
             
             // do all this on success       
             var items = [],
