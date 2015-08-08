@@ -26,7 +26,8 @@
               console.log(newName.data);
               for (var j = 0; j < newName.data.length; j++) {
                 var real = newName.data[j];
-                items.push('<li id="' + newName + '"><span class="name">' + real[0] + '</span><br><span class="addr">' + real[1] + '</span> <span class="city">' + catId + '</span></li>');
+                
+                items.push('<li id="' + newName + '"><span class="name">' + real[0].substring(0,4) + " " + real[0].substr(4,10) + '</span><br><span class="addr">' + real[1] + '</span> <span class="city">' + catId + '</span></li><hr>');
                 
               }
             

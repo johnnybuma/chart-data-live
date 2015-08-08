@@ -49,3 +49,17 @@ h1{
 .btn {
   margin-bottom: 20px;
 }
+
+hr {
+  border-top: 1px solid black;
+  margin-right: 6%;
+}
+
+ul {
+  list-style-type: none;
+  padding: 10%;
+}
+
+.right {
+  float: left;
+}
