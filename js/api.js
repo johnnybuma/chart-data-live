@@ -7,10 +7,13 @@
         $('<i class="fa fa-refresh fa-spin"/>').appendTo('body');
         
         // get selected zip code from selectbox
-         var state = $('select option:selected').text();
+         var state = $('#states option:selected').val();
           console.log(state);
+         var duration = $('#duration option:selected').val();
+          console.log(duration);
+          
         // make AJAX call
-        $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.REV.' + state + '-RES.A', function (data) {
+        $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.REV.' + state + '-RES.' + duration, function (data) {
             
             // do all this on success       
             var items = [],
@@ -44,7 +47,7 @@
             $('.fa-spin').remove();
             
             // append list to page
-            $ul = $('<ul />').appendTo('.content');
+            $ul = $('<ul class="data-list"> </ul>').appendTo('.content');
             
             //append list items to list
             $ul.append(items);

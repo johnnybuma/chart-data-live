@@ -29,6 +29,9 @@ app.get('/',function(req,res){
 	res.sendfile('index.html');
 });
 
+app.get('/co-data',function(req,res){
+  res.sendfile('index2.html');
+});
 
 
 
