@@ -1,5 +1,5 @@
 body {
-  background-image: url(/img/small_steps.png);
+  background-image: url(/img/always_grey.png);
   
 }
 .content {
@@ -19,11 +19,17 @@ h1{
 }
 .name{
     font-weight: bold;   
+    font-size: 30px;
 }
+
+.addr {
+  font-size: 20px;
+}
+
 .addr:after{
-    content: ',';   
+    content: ' - ';   
 }
-.fa-refresh{
+.fa-spinner{
     font-size: 5em;
     color: #999;
     position: relative;
@@ -42,16 +48,27 @@ h1{
 .data-list {
   border-style: solid;
   border-width: 5px;
+  background-image: url(/img/shattered.png);
+
 }
 
 .padd {
   margin-left: 10px;
   margin-right:10px;
   margin-bottom: 10px;
+  
 }
 
 .btn {
+  background-color: #B8B8B8;
+  border-color: white;
   margin-bottom: 20px;
+}
+
+.btn:hover {
+  background-color: white;
+  border-color: black;
+  color: black;
 }
 
 hr {
@@ -67,20 +84,22 @@ ul {
 
 .right {
   float: right;
-  margin-right: 20px;
+  margin-right: 5px;
 }
 
 select {
   padding: 5px;
   border-radius: 5px;
-  color: #4F779E;
-  font-weight: bold;
+  color: white;
+  font-weight: bold !important;
 }
+
+
 
 .title {
   border-style: solid;
   border-width: 5px;
-  background-color: white;
+  background-image: url(/img/shattered.png);
   margin: 1em auto;
   text-align: center;
 }
