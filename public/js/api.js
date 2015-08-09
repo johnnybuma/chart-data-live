@@ -11,7 +11,7 @@
           console.log(state);
          var duration = $('#duration option:selected').val();
           console.log(duration);
-          
+          console.log('key');
         // make AJAX call
         $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.REV.' + state + '-RES.' + duration, function (data) {
             

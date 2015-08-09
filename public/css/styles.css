@@ -1,4 +1,8 @@
-.content{
+body {
+  background-image: url(/img/small_steps.png);
+  
+}
+.content {
     max-width: 900px;
     margin: 1em auto;
     font-family: 'Cantarell', sans-serif;
@@ -52,14 +56,37 @@ h1{
 
 hr {
   border-top: 1px solid black;
-  margin-right: 6%;
+  
 }
 
 ul {
   list-style-type: none;
   padding: 10%;
+  background-color: #E6E6E6;
 }
 
 .right {
-  float: left;
+  float: right;
+  margin-right: 20px;
+}
+
+select {
+  padding: 5px;
+  border-radius: 5px;
+  color: #4F779E;
+  font-weight: bold;
+}
+
+.title {
+  border-style: solid;
+  border-width: 5px;
+  background-color: white;
+  margin: 1em auto;
+  text-align: center;
+}
+
+@media screen and (max-width: 384px) {
+  .list {
+    display: block;
+  }
 }
