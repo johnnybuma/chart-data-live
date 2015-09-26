@@ -9,7 +9,8 @@ var options = {
                       text: "Energy Revenue"
                     },
                     xAxis: {
-                      type: 'category'
+                      type: 'category',
+                      reversed: true
                     },
                     yAxis: {
                       title: {
