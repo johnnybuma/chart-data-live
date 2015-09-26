@@ -3,12 +3,22 @@ var options = {
                     chart: {
                       
                         renderTo: 'container',
-                        type: 'line'
+                        type: 'line',
+                        zoomType: 'x'
                         
                     },
                     title: {
                       text: "Energy Revenue"
                     },
+                    subtitle: {
+                      text: "Click and drag over chart to zoom"
+                    },
+                    credits: {
+                      enabled: true,
+                      href: "http://www.eia.gov",
+                      text: "EIA.GOV"
+                    },
+            
                     xAxis: {
                       type: 'category',
                       reversed: true
