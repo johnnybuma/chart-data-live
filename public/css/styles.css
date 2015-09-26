@@ -1,3 +1,7 @@
+html {
+  max-width: 100%;
+}
+
 body {
   background-image: url(/img/always_grey.png);
   
@@ -65,18 +69,18 @@ h1{
   
 }
 
-.btn {
+/*.btn {
   background-color: #B8B8B8;
   border-color: white;
   margin-bottom: 20px;
 }
-
-.btn:hover {
+*/
+/*.btn:hover {
   background-color: white;
   border-color: black;
   color: black;
 }
-
+*/
 hr {
   border-top: 1px solid black;
   
@@ -96,7 +100,7 @@ ul {
 select {
   padding: 5px;
   border-radius: 5px;
-  color: white;
+  color: black;
   font-weight: bold !important;
 }
 
