@@ -4,6 +4,7 @@ var options = {
                       
                         renderTo: 'container',
                         type: 'line'
+                        
                     },
                     title: {
                       text: "Energy Revenue"
@@ -47,6 +48,7 @@ var chart;
         // get selected zip code from selectbox
          state = $('#states option:selected').val();
          fullState = $('#states option:selected').text();
+          $('#state-title').html(fullState + " " + "Data List &blacktriangledown;");
           console.log(state);
          duration = $('#duration option:selected').val();
           console.log(duration);

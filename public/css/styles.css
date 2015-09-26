@@ -7,11 +7,12 @@ body {
   background-image: url(/img/always_grey.png);
   
 }
-.content {
+/*.content {
     max-width: 900px;
     margin: 1em auto;
     font-family: 'Cantarell', sans-serif;
 }
+*/
 h1{
      font-family: 'Fjalla One', sans-serif;
 }   
