@@ -46,9 +46,10 @@ var chart;
   //var chart;
     // make api call on select
     //$('#duration').on('change', function () {
+options.series = [];  
+  
+  
       $('#fetch').on('click', function () {
-      
-        
       
         // remove resultset if this has already been run
         $('.content ul').remove();
