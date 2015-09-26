@@ -122,7 +122,7 @@ var chart;
             $('.fa-spin').remove();
             
             // append list to page
-            $ul = $('<ul class="data-list"> </ul>').appendTo('.content');
+            $ul = $('<ul class="data-list"> </ul>').appendTo('.panel-body');
             
             //append list items to list
             $ul.append(items);

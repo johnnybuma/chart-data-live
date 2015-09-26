@@ -130,3 +130,9 @@ select {
   color: white;
 }
 
+@media screen and (max-width: 768px) {
+  .col-lg-12 {
+    margin-left: 4%;
+    margin-right: 4%;
+  }
+}
