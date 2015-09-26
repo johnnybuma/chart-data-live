@@ -41,8 +41,14 @@ h1{
   min-height: 500px;
 }
 
-.highcharts-container {
-  width: 700px !important;
+/*.highcharts-container {
+  /*width: 700px !important;
+  margin-right: 5% !important;
+  margin-left: 5%;
+}
+*/
+#container {
+  margin-bottom: 50px !important;
 }
 
 .data-list {
@@ -109,3 +115,13 @@ select {
     display: block;
   }
 }
+
+.chart div {
+  font: 10px sans-serif;
+  background-color: steelblue;
+  text-align: right;
+  padding: 3px;
+  margin: 1px;
+  color: white;
+}
+

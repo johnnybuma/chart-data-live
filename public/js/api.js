@@ -1,17 +1,61 @@
+var callSeries;
+var options = {
+                    chart: {
+                      
+                        renderTo: 'container',
+                        type: 'line'
+                    },
+                    title: {
+                      text: "Energy Revenue"
+                    },
+                    xAxis: {
+                      type: 'category'
+                    },
+                    yAxis: {
+                      title: {
+                        text: 'Million Dollars'
+                      }
+                      
+                      //plotLines: [{
+                      //    value: 0,
+                      //    width: 1,
+                      //    color: '#808080'
+                      //}]
+                    },
+                    series: [{
+                      //name: [],
+                      //data: []
+                    }]
+                };
+  
+var shit = [];
 
 (function ($) {
-    $('button').on('click', function () {
+  var chart;
+    // make api call on select
+    //$('#duration').on('change', function () {
+      $('button').on('click', function () {
+      
+      
+      
         // remove resultset if this has already been run
         $('.content ul').remove();
         // add spinner to indicate something is happening
         $('<i class="fa fa-spinner fa-spin"/>').appendTo('body');
         
         // get selected zip code from selectbox
-         var state = $('#states option:selected').val();
+         state = $('#states option:selected').val();
+         fullState = $('#states option:selected').text();
           console.log(state);
-         var duration = $('#duration option:selected').val();
+         duration = $('#duration option:selected').val();
           console.log(duration);
           console.log('key');
+              //options.series[0].name.push(state);
+         var newMan = {
+                    name: fullState,
+                    color: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+                    data: []
+                  };
         // make AJAX call
         $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.REV.' + state + '-RES.' + duration, function (data) {
             
@@ -19,25 +63,50 @@
             var items = [],
                 $ul;
             console.log(data);
-            for (var i = 0; i < data.series.length; i++) {
-              var newName = data.series[i];
-              var catId = newName.units;
-              console.log(newName);
-              console.log(newName.data);
-              for (var j = 0; j < newName.data.length; j++) {
-                var real = newName.data[j];
+            // loop through raw api data and define variables
+            for (i = 0; i < data.series.length; i++) {
+              //edit review
+              callSeries = data.series[i];
+              catId = callSeries.units;
+              console.log(callSeries);
+              console.log(callSeries.data);
+              console.log(catId);
+               seriesDone = [];
+              
+              for (j = 0; j < callSeries.data.length; j++) {
+               
+               
                 
-                items.push('<li id="' + newName + '"><span class="name">' + real[0].substring(0,4) + " " + real[0].substr(4,10) + '</span><br><span class="addr">' + real[1] + '</span> <span class="city">' + catId + '</span></li><hr>');
+                seriesDone.push(callSeries.data[j][1]);
+                console.log(callSeries.data[j][0]);  
+                seriesLine = callSeries.data[j];
+                // New Lines of code
+                seriesNow = seriesLine[1];
+                seriesDone = seriesNow.toString().split(".");
+                                console.log(seriesDone[1]);
+
+                // end -- was seriesLine
+                console.log(seriesLine);
                 
-              }
-            
-            
+               
+                  console.log(newMan.data);
+                  newMan.data.push(seriesLine);
+                  
+                  
+                
+                  console.log(options.series);
+                  //options.series[0].data.push(seriesLine);
+
+                  
+
+                
+                items.push('<li id="' + callSeries + '"><span class="name">' + seriesLine[0].substring(0,4) + " " + seriesLine[0].substr(4,10) + '</span><br><span class="addr">' + seriesDone[0] + '</span> <span class="city">' + catId + '</span></li><hr>');
+                
+              } 
+              
             }
-
-          
-            
-
-            
+            options.series.push(newMan);
+            var chart = new Highcharts.Chart(options);
             console.log("success!");
             // if no items were returned then add a message to that effect
             if (items.length < 1) {
@@ -52,6 +121,19 @@
             
             //append list items to list
             $ul.append(items);
+
         });
+      
+       
+      
+      
     });
+  
+  
+  
+
+    
+
 }(jQuery));
+
+
