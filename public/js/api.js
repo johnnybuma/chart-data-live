@@ -30,14 +30,14 @@ var options = {
                 };
   
 var shit = [];
-
+var chart;
 (function ($) {
-  var chart;
+  //var chart;
     // make api call on select
     //$('#duration').on('change', function () {
-      $('button').on('click', function () {
+      $('#fetch').on('click', function () {
       
-      
+        
       
         // remove resultset if this has already been run
         $('.content ul').remove();
@@ -52,7 +52,7 @@ var shit = [];
           console.log(duration);
           console.log('key');
               //options.series[0].name.push(state);
-         var newMan = {
+         newMan = {
                     name: fullState,
                     color: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
                     data: []
@@ -64,6 +64,7 @@ var shit = [];
             var items = [],
                 $ul;
             console.log(data);
+            
             // loop through raw api data and define variables
             for (i = 0; i < data.series.length; i++) {
               //edit review
@@ -107,7 +108,10 @@ var shit = [];
               
             }
             options.series.push(newMan);
-            var chart = new Highcharts.Chart(options);
+            chart = new Highcharts.Chart(options);
+            
+               
+          
             console.log("success!");
             // if no items were returned then add a message to that effect
             if (items.length < 1) {
@@ -122,6 +126,8 @@ var shit = [];
             
             //append list items to list
             $ul.append(items);
+          
+            
 
         });
       
@@ -138,3 +144,14 @@ var shit = [];
 }(jQuery));
 
 
+$('#reset').on('click', function () {
+                while(chart.series.length > 0)
+                //for(i in chart.series) 
+                {
+                    //chart.series[i].remove(true);
+                    options.series = [];
+                      chart.series[0].remove(true);
+                    console.log(options.series);
+                }
+                  
+            });          
