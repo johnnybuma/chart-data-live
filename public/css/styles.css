@@ -39,7 +39,6 @@ h1{
     font-size: 2em;
     color: #efefef;
     position: relative;
-    left: 35%;
 }
 
 .jvectormap-container {
@@ -136,3 +135,4 @@ select {
     margin-right: 4%;
   }
 }
+
