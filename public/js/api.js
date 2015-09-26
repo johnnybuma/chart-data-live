@@ -53,7 +53,7 @@ var chart;
         // remove resultset if this has already been run
         $('.content ul').remove();
         // add spinner to indicate something is happening
-        $('<i class="fa fa-spinner fa-spin"/>').appendTo('body');
+        $('<i class="fa fa-cog fa-1 fa-spin"/>').prependTo('#spinning');
         
         // get selected zip code from selectbox
          state = $('#states option:selected').val();
