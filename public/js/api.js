@@ -23,17 +23,26 @@ var options = {
                       type: 'category',
                       reversed: true
                     },
-                    yAxis: {
-                      title: {
-                        text: 'Million Dollars'
+                    yAxis: [
+                      {
+                        title: {
+                          text: 'Million Dollars'
+                        },
+                        labels: {
+                          format: '${value}',
+                          style: {
+                          color: '#339933'
+                          }
+                        }
+                      },
+                      { //secondary axis for sales
+                        gridlinewidth: 1,
+                        title: {
+                          text: 'Million KWH'
+                        },
+                        opposite: true
                       }
-                      
-                      //plotLines: [{
-                      //    value: 0,
-                      //    width: 1,
-                      //    color: '#808080'
-                      //}]
-                    },
+                    ],
                     series: [{
                       //name: [],
                       //data: []
@@ -42,6 +51,9 @@ var options = {
   
 var shit = [];
 var chart;
+
+
+
 (function ($) {
   //var chart;
     // make api call on select
@@ -57,6 +69,7 @@ options.series = [];
         $('<i class="fa fa-cog fa-1 fa-spin" style="float: left;"/>').prependTo('#spinning');
         
         // get selected zip code from selectbox
+         thistype = $('#sale-rev option:selected').val();
          state = $('#states option:selected').val();
          fullState = $('#states option:selected').text();
           $('#state-title').html(fullState + " " + "Data List &blacktriangledown;");
@@ -65,14 +78,37 @@ options.series = [];
           console.log(duration);
           console.log('key');
               //options.series[0].name.push(state);
+        
+        var setaxis = function () {
+            if (thistype == 'REV') {
+              return 0;
+            } else {
+              return 1;
+            }
+        };
+        var setType = function () {
+          if (thistype == 'REV') {
+            return 'column'
+          } else {
+            return 'line'
+          }
+        };
+        console.log(setaxis);
+
+        
          newMan = {
                     name: fullState,
                     color: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
-                    data: []
+                    data: [],
+                    yAxis: setaxis(),
+                    type: setType() 
                   };
         // make AJAX call
-        $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.REV.' + state + '-RES.' + duration, function (data) {
+        $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.' + thistype + '.' + state + '-RES.' + duration, function (data) {
             
+            //set y-axis
+
+          
             // do all this on success       
             var items = [],
                 $ul;
@@ -105,6 +141,7 @@ options.series = [];
                 
                
                   console.log(newMan.data);
+                  //send data to json object for chart
                   newMan.data.push(seriesLine);
                   
                   
