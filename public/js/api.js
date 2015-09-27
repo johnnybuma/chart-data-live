@@ -105,7 +105,6 @@ var options =
               
               for (j = 0; j < callSeries.data.length; j++) {
                 seriesDone.push(callSeries.data[j][1]);
-                console.log(callSeries.data[j][0]);  
                 seriesLine = callSeries.data[j];
                 seriesNow = seriesLine[1];
                 seriesDone = seriesNow.toString().split(".");
