@@ -10,7 +10,7 @@ SMTP Server Configuration.
 
 /*------------------SMTP Over-----------------------------*/
 
-secret.set('key','33286745501E59DF160860DFFA09AD36');
+//secret.set('key','33286745501E59DF160860DFFA09AD36');
 
 app.use(
      "/",
@@ -23,13 +23,13 @@ app.use(
 
 
 app.get('/',function(req,res){
-  res.send(secret.get('key'));
+  //res.send(secret.get('key'));
 	res.sendfile('index.html');
 });
 
-app.get('/colorado',function(req,res){
-  res.sendfile('colorado.html');
-});
+//app.get('/colorado',function(req,res){
+//  res.sendfile('colorado');
+//});
 
 
 
