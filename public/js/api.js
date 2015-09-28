@@ -53,15 +53,22 @@ var options =
     },
     series: [{}]
 };
+//Hide Chart and Data View Elements
+$('#container').hide();
+$('.list').hide();
 
 (function ($) {
     //Ensure that the series begins with created data, removes empty series object that was displaying on first call  
     options.series = [];
     //Execute all this on click of fetch button
     $('#fetch').on('click', function () {
-
+        //Show Chart and Data View Elements
+        $('#container').show();
+        $('.list').show();
         // remove resultset if this has already been run
         $('.content ul').remove();
+        //Remove Jumbotron Instructions
+        $('#jombo').hide();
         // add spinner to indicate something is happening
         $('<i class="fa fa-cog fa-1 fa-spin" style="float: left;"/>').prependTo('#spinning');
 
@@ -183,5 +190,8 @@ $('#reset').on('click', function () {
     {
         options.series = [];
         chart.series[0].remove(true);
+        $('#jombo').show();
+        $('#container').hide();
+        $('.list').hide();
     }
 });          
