@@ -76,7 +76,7 @@ var options =
         //Set Suffix by Data Type
         var setSuffix = function () {
             if (thistype == 'REV') {
-                return "$"
+                return " $"
             } else if (thistype == 'SALES') {
                 return " KWH"
             } else {
