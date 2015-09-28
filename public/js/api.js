@@ -41,7 +41,12 @@ var options =
                 format: '{value} KWH'
             },
             opposite: true
-        }
+        },
+        {//Third Axis
+            title: {
+                text: "Cents Per KWH"
+            }
+        },
     ],
     tooltip: {
         shared: true
@@ -64,6 +69,7 @@ var options =
         thistype = $('#sale-rev option:selected').val();
         state = $('#states option:selected').val();
         fullState = $('#states option:selected').text();
+        price = $('#sale-rev option:selected').val();
         $('#state-title').html(fullState + " " + "Data List &blacktriangledown;");
         duration = $('#duration option:selected').val();
 
@@ -71,8 +77,10 @@ var options =
         var setSuffix = function () {
             if (thistype == 'REV') {
                 return "$"
-            } else {
+            } else if (thistype == 'SALES') {
                 return " KWH"
+            } else {
+                return " Cents/KWH"
             }
         };
 
@@ -80,8 +88,10 @@ var options =
         var setaxis = function () {
             if (thistype == 'REV') {
                 return 0;
-            } else {
+            } else if (thistype == 'SALES') {
                 return 1;
+            } else {
+                return 2;
             }
         };
         //Set chart type by sales or revenue data
@@ -106,9 +116,9 @@ var options =
 
 
         };
-
+        var url = 'http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.' + thistype + '.' + state + '-RES.' + duration;
         // make AJAX call
-        $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.' + thistype + '.' + state + '-RES.' + duration, function (data) {
+        $.getJSON(url, function (data) {
 
             //set y-axis
 
