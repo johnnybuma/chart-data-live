@@ -1,140 +1,166 @@
-var options = 
-    {
-      chart: {
+var options =
+{
+    chart: {
         renderTo: 'container',
         type: 'line',
         zoomType: 'x'
-      },
-      title: {
+    },
+    title: {
         text: "Energy Revenue"
-      },
-      subtitle: {
+    },
+    subtitle: {
         text: "Click and drag over chart to zoom"
-      },
-      credits: {
+    },
+    credits: {
         enabled: true,
         href: "http://www.eia.gov",
         text: "EIA.GOV"
-       },
-       xAxis: {
+    },
+    xAxis: {
         type: 'category',
         reversed: true
-       },
-       yAxis: [
+    },
+    yAxis: [
         {
-          title: {
-            text: 'Million Dollars'
-          },
-          labels: {
-            format: '${value}',
-            style: {
-              color: '#339933'
+            title: {
+                text: 'Million Dollars'
+            },
+            labels: {
+                format: '${value}',
+                style: {
+                    color: '#339933'
+                }
             }
-          }
-         },
-         { //secondary axis for sales
-           gridlinewidth: 1,
-           title: {
-             text: 'Million KWH'
-           },
-           opposite: true
-         }
-         ],
-         series: [{}]
-    };
-  
+        },
+        { //secondary axis for sales
+            gridlinewidth: 1,
+            title: {
+                text: 'Million KWH'
+            },
+            labels: {
+                format: '{value} KWH'
+            },
+            opposite: true
+        }
+    ],
+    tooltip: {
+        shared: true
+    },
+    series: [{}]
+};
+
 (function ($) {
     //Ensure that the series begins with created data, removes empty series object that was displaying on first call  
     options.series = [];
     //Execute all this on click of fetch button
     $('#fetch').on('click', function () {
-        
+
         // remove resultset if this has already been run
         $('.content ul').remove();
         // add spinner to indicate something is happening
         $('<i class="fa fa-cog fa-1 fa-spin" style="float: left;"/>').prependTo('#spinning');
-        
+
         // get selected data from select boxes
-         thistype = $('#sale-rev option:selected').val();
-         state = $('#states option:selected').val();
-         fullState = $('#states option:selected').text();
-         $('#state-title').html(fullState + " " + "Data List &blacktriangledown;");
-         duration = $('#duration option:selected').val();
-         
+        thistype = $('#sale-rev option:selected').val();
+        state = $('#states option:selected').val();
+        fullState = $('#states option:selected').text();
+        $('#state-title').html(fullState + " " + "Data List &blacktriangledown;");
+        duration = $('#duration option:selected').val();
+
+        //Set Suffix by Data Type
+        var setSuffix = function () {
+            if (thistype == 'REV') {
+                return "$"
+            } else {
+                return " KWH"
+            }
+        };
+
         //Set yAxis based on sales or revenue data
         var setaxis = function () {
-          if (thistype == 'REV') {
-            return 0;
-          } else {
-            return 1;
-          }
+            if (thistype == 'REV') {
+                return 0;
+            } else {
+                return 1;
+            }
         };
         //Set chart type by sales or revenue data
         var setType = function () {
-          if (thistype == 'REV') {
-            return 'column'
-          } else {
-            return 'line'
-          }
+            if (thistype == 'REV') {
+                return 'column'
+            } else {
+                return 'line'
+            }
         };
 
         // Set-up object for highchart series array
         newMan = {
-          name: fullState,
-          color: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
-          data: [],
-          yAxis: setaxis(),
-          type: setType() 
-         };
-        
+            name: fullState,
+            color: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+            data: [],
+            yAxis: setaxis(),
+            type: setType(),
+            tooltip: {
+                valueSuffix: setSuffix()
+            }
+
+
+        };
+
         // make AJAX call
         $.getJSON('http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.' + thistype + '.' + state + '-RES.' + duration, function (data) {
-            
+
             //set y-axis
 
-          
+
             // Declare list data array       
             var items = [],
                 $ul;
-            
+
             // loop through raw api data and declare variables
             for (i = 0; i < data.series.length; i++) {
-              callSeries = data.series[i];
-              catId = callSeries.units;
-              seriesDone = [];
-              
-              for (j = 0; j < callSeries.data.length; j++) {
-                seriesDone.push(callSeries.data[j][1]);
-                seriesLine = callSeries.data[j];
-                seriesNow = seriesLine[1];
-                seriesDone = seriesNow.toString().split(".");
-                //send data to json object for chart
-                newMan.data.push(seriesLine);
-                //Push data to list array  
-                items.push('<li id="' + callSeries + '"><span class="name">' + seriesLine[0].substring(0,4) + " " + seriesLine[0].substr(4,10) + '</span><br><span class="addr">' + seriesDone[0] + '</span> <span class="city">' + catId + '</span></li><hr>');
-                
-              }//end for loop j 
+                callSeries = data.series[i];
+                catId = callSeries.units;
+                seriesDone = [];
+
+                for (j = 0; j < callSeries.data.length; j++) {
+                    seriesDone.push(callSeries.data[j][1]);
+                    seriesLine = callSeries.data[j];
+                    seriesNow = seriesLine[1];
+                    seriesDone = seriesNow.toString().split(".");
+                    //send data to json object for chart
+                    var myYear = seriesLine[0];
+                    var myVal = Number(seriesDone[0]);
+                    var fuckThis = [];
+                    fuckThis.push(myYear);
+                    fuckThis.push(myVal);
+                    console.log(fuckThis);
+                    newMan.data.push(fuckThis); //Was seriesLine *Less Acurate with fuckThis
+                    //Push data to list array
+                    items.push('<li id="' + callSeries + '"><span class="name">' + seriesLine[0].substring(0,4) + " " + seriesLine[0].substr(4,10) + '</span><br><span class="addr">' + seriesDone[0] + '</span> <span class="city">' + catId + '</span></li><hr>');
+
+                }//end for loop j
             }//end for loop i
-            
+
             //Push constructed series data to highcharts object
             options.series.push(newMan);
             //Set up chart with declared data (options)//
             chart = new Highcharts.Chart(options);
-            
+
             //Verify all went according to plan
             console.log("success!");
-            
+
             // if no data returned then add a message to that effect
             if (items.length < 1) {
                 items.push('<li>Failure, try again!</li>');
             }
-            
+
             // remove spinner
             $('.fa-spin').remove();
-            
+
             // append list to page
             $ul = $('<ul class="data-list"> </ul>').appendTo('.panel-body');
-            
+
             //append list items to list
             $ul.append(items);
         });
@@ -143,9 +169,9 @@ var options =
 
 //Reset chart series data to empty and clear chart 
 $('#reset').on('click', function () {
-  while(chart.series.length > 0)
+    while(chart.series.length > 0)
     {
-      options.series = [];
-      chart.series[0].remove(true);
+        options.series = [];
+        chart.series[0].remove(true);
     }
 });          
