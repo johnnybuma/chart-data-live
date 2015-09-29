@@ -6,7 +6,7 @@ var options =
         zoomType: 'x'
     },
     title: {
-        text: "Energy Revenue"
+        text: "Residential Energy Data"
     },
     subtitle: {
         text: "Click and drag over chart to zoom"
@@ -28,7 +28,7 @@ var options =
             labels: {
                 format: '${value}',
                 style: {
-                    color: '#339933'
+                    color: '#000000'
                 }
             }
         },
@@ -45,6 +45,9 @@ var options =
         {//Third Axis
             title: {
                 text: "Cents Per KWH"
+            },
+            labels: {
+                format: '${value}'
             }
         },
     ],
@@ -56,6 +59,7 @@ var options =
 //Hide Chart and Data View Elements
 $('#container').hide();
 $('.list').hide();
+$('#calculate').hide();
 
 (function ($) {
     //Ensure that the series begins with created data, removes empty series object that was displaying on first call  
@@ -65,6 +69,7 @@ $('.list').hide();
         //Show Chart and Data View Elements
         $('#container').show();
         $('.list').show();
+        $('#calculate').show();
         // remove resultset if this has already been run
         $('.content ul').remove();
         //Remove Jumbotron Instructions
@@ -74,11 +79,19 @@ $('.list').hide();
 
         // get selected data from select boxes
         thistype = $('#sale-rev option:selected').val();
+        fulltype = $('#sale-rev option:selected').text();
         state = $('#states option:selected').val();
         fullState = $('#states option:selected').text();
         price = $('#sale-rev option:selected').val();
         $('#state-title').html(fullState + " " + "Data List &blacktriangledown;");
         duration = $('#duration option:selected').val();
+
+        //Calculate Percent Increased
+        var rincrease = function (one, two) {
+            var diff = one - two;
+            var change = (diff / one) * 100;
+            return change;
+        }
 
         //Set Suffix by Data Type
         var setSuffix = function () {
@@ -139,7 +152,11 @@ $('.list').hide();
                 callSeries = data.series[i];
                 catId = callSeries.units;
                 seriesDone = [];
-
+                change = rincrease(callSeries.data[0][1], callSeries.data[13][1]);//NEW CODE!!
+                formattedChange = change.toString().slice(0,5);
+                console.log(formattedChange);
+                $('#calculate').append(fullState + '\'s ' + fulltype + ' has increased by ' + formattedChange + '%' + ' since 2001' + '<br>');
+                //End New Code TODO: make sure this shit works!
                 for (j = 0; j < callSeries.data.length; j++) {
                     seriesDone.push(callSeries.data[j][1]);
                     seriesLine = callSeries.data[j];
@@ -181,6 +198,7 @@ $('.list').hide();
             //append list items to list
             $ul.append(items);
         });
+
     });
 }(jQuery));
 
@@ -193,5 +211,6 @@ $('#reset').on('click', function () {
         $('#jombo').show();
         $('#container').hide();
         $('.list').hide();
+        $('#calculate').empty().hide();
     }
 });          
