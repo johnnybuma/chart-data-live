@@ -157,7 +157,7 @@ $('#calculate').hide();
                 change = rincrease(callSeries.data[0][1], callSeries.data[numTwo][1]);//NEW CODE!!
                 formattedChange = change.toString().slice(0,5);
                 console.log(formattedChange);
-                $('#calculate').append(fullState + '\'s ' + fulltype + ' has increased by ' + formattedChange + '%' + ' since 2001' + '<br>');
+                $('#calculate').append(fullState + '\'s ' + fulltype + ' has increased by ' + formattedChange + '%' + ' since 2001' + '<br><hr>');
                 //End New Code TODO: make sure this shit works!
                 for (j = 0; j < callSeries.data.length; j++) {
                     seriesDone.push(callSeries.data[j][1]);
