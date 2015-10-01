@@ -152,7 +152,9 @@ $('#calculate').hide();
                 callSeries = data.series[i];
                 catId = callSeries.units;
                 seriesDone = [];
-                change = rincrease(callSeries.data[0][1], callSeries.data[13][1]);//NEW CODE!!
+                numTwo = callSeries.data.length - 1;
+                console.log(numTwo);
+                change = rincrease(callSeries.data[0][1], callSeries.data[numTwo][1]);//NEW CODE!!
                 formattedChange = change.toString().slice(0,5);
                 console.log(formattedChange);
                 $('#calculate').append(fullState + '\'s ' + fulltype + ' has increased by ' + formattedChange + '%' + ' since 2001' + '<br>');
