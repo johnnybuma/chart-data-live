@@ -225,6 +225,61 @@ var resetChart = function () {
 
         var url = 'http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.' + thistype + '.' + state + '-RES.' + duration;
         // make AJAX call
+<<<<<<< HEAD
+=======
+        $.getJSON(url, function (data) {
+
+            //set y-axis
+
+
+            // Declare list data array       
+            var items = [],
+                $ul;
+
+            // loop through raw api data and declare variables
+            for (i = 0; i < data.series.length; i++) {
+                callSeries = data.series[i];
+                catId = callSeries.units;
+                seriesDone = [];
+                numTwo = callSeries.data.length - 1;
+                console.log(numTwo);
+                change = rincrease(callSeries.data[0][1], callSeries.data[numTwo][1]);//NEW CODE!!
+                formattedChange = change.toString().slice(0,5);
+                console.log(formattedChange);
+                $('#calculate').append(fullState + '\'s ' + fulltype + ' has increased by ' + formattedChange + '%' + ' since 2001' + '<br><hr>');
+                //End New Code TODO: make sure this shit works!
+                for (j = 0; j < callSeries.data.length; j++) {
+                    seriesDone.push(callSeries.data[j][1]);
+                    seriesLine = callSeries.data[j];
+                    seriesNow = seriesLine[1];
+                    seriesDone = seriesNow.toString().split(".");
+                    //send data to json object for chart
+                    var myYear = seriesLine[0];
+                    var myVal = Number(seriesDone[0]);
+                    var fuckThis = [];
+                    fuckThis.push(myYear);
+                    fuckThis.push(myVal);
+                    console.log(fuckThis);
+                    newMan.data.push(fuckThis); //Was seriesLine *Less Acurate with fuckThis
+                    //Push data to list array
+                    items.push('<li id="' + callSeries + '"><span class="name">' + seriesLine[0].substring(0,4) + " " + seriesLine[0].substr(4,10) + '</span><br><span class="addr">' + seriesDone[0] + '</span> <span class="city">' + catId + '</span></li><hr>');
+
+                }//end for loop j
+            }//end for loop i
+
+            //Push constructed series data to highcharts object
+            options.series.push(newMan);
+            //Set up chart with declared data (options)//
+            chart = new Highcharts.Chart(options);
+
+            //Verify all went according to plan
+            console.log("success!");
+
+            // if no data returned then add a message to that effect
+            if (items.length < 1) {
+                items.push('<li>Failure, try again!</li>');
+            }
+>>>>>>> e7ee5b62cb49309db090d625b83509419cd62faa
 
         var eiaCall = function () {
 
