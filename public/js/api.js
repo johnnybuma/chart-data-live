@@ -23,7 +23,10 @@ var options =
     yAxis: [
         {
             title: {
-                text: 'Million Dollars'
+                text: 'Million Dollars',
+                style: {
+
+                }
             },
             labels: {
                 format: '${value}',
@@ -35,7 +38,10 @@ var options =
         { //secondary axis for sales
             gridlinewidth: 1,
             title: {
-                text: 'Million KWH'
+                text: 'Million KWH',
+                style: {
+
+                }
             },
             labels: {
                 format: '{value} KWH'
@@ -44,7 +50,10 @@ var options =
         },
         {//Third Axis
             title: {
-                text: "Cents Per KWH"
+                text: "Cents Per KWH",
+                style: {
+
+                }
             },
             labels: {
                 format: '${value}'
@@ -52,7 +61,10 @@ var options =
         },
         {// Fourth Axis for Population
             title: {
-                text: "Population in K"
+                text: "Population in K",
+                style: {
+
+                }
             },
             labels: {
                 format: '{value} k'
@@ -120,6 +132,11 @@ var resetChart = function () {
             $('#states').prop('selectedIndex',0);
             $('#sale-rev').prop('selectedIndex',0);
             $('#duration').prop('selectedIndex',0);
+            options.yAxis[0].title.style.color = '#000000';
+            options.yAxis[1].title.style.color = '#000000';
+            options.yAxis[2].title.style.color = '#000000';
+            options.yAxis[3].title.style.color = '#000000';
+
         }
     });
 };
@@ -210,7 +227,7 @@ var resetChart = function () {
         // Set-up object for highchart series array
         newMan = {
             name: fullState,
-            color: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
+            //color: '#'+(Math.random()*0xFFFFFF<<0).toString(16),
             data: [],
             yAxis: setaxis(),
             type: setType(),
@@ -221,6 +238,12 @@ var resetChart = function () {
 
         };
 
+        //set colors
+        thisAxis = setaxis();
+        seriesColor = (Math.random()*0xFFFFFF<<0).toString(16);
+        newMan.color = '#' + seriesColor;
+        options.yAxis[thisAxis].title.style.color = '#' + seriesColor;
+
         var popurl = "https://www.quandl.com/api/v3/datasets/FRED/" + state + "POP.json?start_date=2000-12-31";
 
         var url = 'http://api.eia.gov/series/?api_key=33286745501E59DF160860DFFA09AD36&series_id=ELEC.' + thistype + '.' + state + '-RES.' + duration;
@@ -228,8 +251,6 @@ var resetChart = function () {
         var eiaCall = function () {
 
             $.getJSON(url, function (data) {
-
-                //set y-axis
 
 
                 // Declare list data array
