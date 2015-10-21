@@ -78,6 +78,7 @@ var options =
     series: [{}]
 };
 
+hideOption = $("<option value='POP'>Population</option>");
 
 //Hide Chart and Data View Elements
 $('#container').hide();
@@ -94,24 +95,26 @@ $('#reset').hide();
 //var firstType = $('#sale-rev option:selected').val();
 $(document).ready(function() {
 
-    $('#setData').on('select', function () {
-
-    });
 
     $('#states').on('change', function () {
         $('#duration'). show();
         $('#fetch').show();
         $('#reset').show();
     });
+  
+  
     $('#duration').on('change', function () {
-        $('#sale-rev').show();
-        duration = $('#duration').val();
+        var duration = $('#duration option:selected').val();
+
         if (duration === 'A') {
-            $('#sale-rev option[value="POP"]').show();
+            $('#sale-rev').append(hideOption);
         } else {
-            $('#sale-rev option[value="POP"]').hide();
+            $('#sale-rev option[value="POP"]').remove();
         }
+        $('#sale-rev').show();
+
     });
+    
 
 });
 
@@ -145,6 +148,8 @@ var resetChart = function () {
 //checkType();
 (function ($) {
     //Ensure that the series begins with created data, removes empty series object that was displaying on first call
+  
+    
     resetChart();
     options.series = [];
     //Execute all this on click of fetch button
